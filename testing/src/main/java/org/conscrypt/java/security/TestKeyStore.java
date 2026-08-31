@@ -1157,4 +1157,30 @@ public final class TestKeyStore {
          */
         assertEquals(3, chain.length);
     }
+
+    @Test
+    public void testGenerateMlKemKeyPair() throws Exception {
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance("ML-KEM", provider);
+        kpg.initialize(MLKEMParameterSpec.ml_kem_768);
+
+        KeyPair kp = kpg.generateKeyPair();
+
+        assertNotNull(kp.getPrivate());
+        assertNotNull(kp.getPublic());
+    }
+
+
+    @Test
+    public void testGenerateMlDsaKeyPair() throws Exception {
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance("ML-DSA", provider);
+        kpg.initialize(MLDSAParameterSpec.ml_dsa_65);
+
+        KeyPair kp = kpg.generateKeyPair();
+
+        assertNotNull(kp.getPrivate());
+        assertNotNull(kp.getPublic());
+    }
 }
+
+
+`
