@@ -73,4 +73,12 @@ public class PqcKeyGenerationTest {
 
         assertTrue(verifier.verify(signatureBytes));
     }
+
+    public static void main(String[] args) throws Exception {
+        PqcKeyGenerationTest program = new PqcKeyGenerationTest();
+        program.testMlDsaExplicitProviderDetection();
+
+        System.out.println(
+                "testMlDsaExplicitProviderDetection completed successfully");
+    }
 }

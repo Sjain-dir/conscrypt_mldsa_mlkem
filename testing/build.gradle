@@ -30,3 +30,13 @@ dependencies {
 tasks.withType(Javadoc).configureEach {
     enabled = false
 }
+
+tasks.register("runMlDsaExplicitProviderDetection", JavaExec) {
+    group = "verification"
+    description = "Runs the ML-DSA explicit-provider detection reproduction"
+
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass.set(
+        "org.conscrypt.java.security.PqcKeyGenerationTest"
+    )
+}
