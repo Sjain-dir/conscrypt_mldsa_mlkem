@@ -71,6 +71,10 @@ public class PqcKeyGenerationTest {
     public void controlProviderConstant() throws Exception {
         registerBouncyCastleProvider();
 
+        System.out.println(
+        "Bouncy Castle provider name: "
+                + BouncyCastleProvider.PROVIDER_NAME);
+
         KeyPairGenerator generator = KeyPairGenerator.getInstance(
                 "ML-DSA", BouncyCastleProvider.PROVIDER_NAME);
 
@@ -134,9 +138,9 @@ public class PqcKeyGenerationTest {
 
     public static void main(String[] args) throws Exception {
         PqcKeyGenerationTest program = new PqcKeyGenerationTest();
-        program.testMlDsaExplicitProviderDetection();
 
-        System.out.println(
-                "testMlDsaExplicitProviderDetection completed successfully");
+        program.controlProviderConstant();
+
+        System.out.println("controlProviderConstant completed successfully");
     }
 }

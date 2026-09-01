@@ -40,3 +40,11 @@ tasks.register("runMlDsaExplicitProviderDetection", JavaExec) {
         "org.conscrypt.java.security.PqcKeyGenerationTest"
     )
 }
+
+tasks.register("runPqcKeyGeneration", JavaExec) {
+    group = "verification"
+    description = "Runs the PQC key-generation reproduction program"
+
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass.set("org.conscrypt.java.security.PqcKeyGenerationTest")
+}
