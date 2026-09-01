@@ -36,6 +36,21 @@ public class PqcKeyGenerationTest {
         assertNotNull(kp.getPrivate());
         assertNotNull(kp.getPublic());
     }
+@Test
+    public void controlSingleArgument() throws Exception {
+    KeyPairGenerator generator =
+            KeyPairGenerator.getInstance("ML-DSA");
+}
+@Test
+public void controlLiteralProvider() throws Exception {
+    KeyPairGenerator generator =
+            KeyPairGenerator.getInstance("ML-DSA", "BC");
+}
+@Test
+public void controlProviderConstant() throws Exception {
+    KeyPairGenerator generator = KeyPairGenerator.getInstance(
+            "ML-DSA", BouncyCastleProvider.PROVIDER_NAME);
+}
 
     @Test
     public void testMlDsaExplicitProviderDetection() throws Exception {
