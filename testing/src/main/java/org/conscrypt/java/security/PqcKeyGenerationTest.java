@@ -80,6 +80,21 @@ public class PqcKeyGenerationTest {
         assertNotNull(keyPair.getPublic());
     }
 
+    private static final String LOCAL_PROVIDER_NAME = "BC";
+
+    @Test
+    public void controlLocalProviderConstant() throws Exception {
+        registerBouncyCastleProvider();
+
+        KeyPairGenerator generator = KeyPairGenerator.getInstance(
+                "ML-DSA", LOCAL_PROVIDER_NAME);
+
+        KeyPair keyPair = generator.generateKeyPair();
+
+        assertNotNull(keyPair.getPrivate());
+        assertNotNull(keyPair.getPublic());
+    }
+
     @Test
     public void testMlDsaExplicitProviderDetection() throws Exception {
         if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
