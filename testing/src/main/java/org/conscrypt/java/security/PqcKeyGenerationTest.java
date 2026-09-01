@@ -15,6 +15,12 @@ import org.junit.Test;
 
 public class PqcKeyGenerationTest {
 
+    private static void registerBouncyCastleProvider() {
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
+
     @Test
     public void testGenerateMlKemKeyPair() throws Exception {
         KeyPairGenerator kpg =
@@ -36,21 +42,43 @@ public class PqcKeyGenerationTest {
         assertNotNull(kp.getPrivate());
         assertNotNull(kp.getPublic());
     }
-@Test
+
+    @Test
     public void controlSingleArgument() throws Exception {
-    KeyPairGenerator generator =
-            KeyPairGenerator.getInstance("ML-DSA");
-}
-@Test
-public void controlLiteralProvider() throws Exception {
-    KeyPairGenerator generator =
-            KeyPairGenerator.getInstance("ML-DSA", "BC");
-}
-@Test
-public void controlProviderConstant() throws Exception {
-    KeyPairGenerator generator = KeyPairGenerator.getInstance(
-            "ML-DSA", BouncyCastleProvider.PROVIDER_NAME);
-}
+        KeyPairGenerator generator =
+                KeyPairGenerator.getInstance("ML-DSA");
+
+        KeyPair keyPair = generator.generateKeyPair();
+
+        assertNotNull(keyPair.getPrivate());
+        assertNotNull(keyPair.getPublic());
+    }
+
+    @Test
+    public void controlLiteralProvider() throws Exception {
+        registerBouncyCastleProvider();
+
+        KeyPairGenerator generator =
+                KeyPairGenerator.getInstance("ML-DSA", "BC");
+
+        KeyPair keyPair = generator.generateKeyPair();
+
+        assertNotNull(keyPair.getPrivate());
+        assertNotNull(keyPair.getPublic());
+    }
+
+    @Test
+    public void controlProviderConstant() throws Exception {
+        registerBouncyCastleProvider();
+
+        KeyPairGenerator generator = KeyPairGenerator.getInstance(
+                "ML-DSA", BouncyCastleProvider.PROVIDER_NAME);
+
+        KeyPair keyPair = generator.generateKeyPair();
+
+        assertNotNull(keyPair.getPrivate());
+        assertNotNull(keyPair.getPublic());
+    }
 
     @Test
     public void testMlDsaExplicitProviderDetection() throws Exception {
