@@ -100,6 +100,23 @@ public class PqcKeyGenerationTest {
     }
 
     @Test
+    public void controlProviderConstantAES() throws Exception {
+        registerBouncyCastleProvider();
+
+        System.out.println(
+        "Bouncy Castle provider name: "
+                + BouncyCastleProvider.PROVIDER_NAME);
+
+        KeyPairGenerator generator = KeyPairGenerator.getInstance(
+                "AES", BouncyCastleProvider.PROVIDER_NAME);
+
+        KeyPair keyPair = generator.generateKeyPair();
+
+        assertNotNull(keyPair.getPrivate());
+        assertNotNull(keyPair.getPublic());
+    }
+
+    @Test
     public void testMlDsaExplicitProviderDetection() throws Exception {
         if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
             Security.addProvider(new BouncyCastleProvider());
